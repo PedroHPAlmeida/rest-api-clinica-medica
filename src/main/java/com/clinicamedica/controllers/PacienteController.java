@@ -35,7 +35,7 @@ public class PacienteController {
 
     @GetMapping(path = "/{cpf}")
     @ResponseStatus(HttpStatus.OK)
-    public Paciente buscarPacientePorId(@PathVariable String cpf){
+    public Paciente buscarPacientePorCpf(@PathVariable String cpf){
         return pacienteService.buscarPacientePorCpf(cpf)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não encontrado."));
     }
