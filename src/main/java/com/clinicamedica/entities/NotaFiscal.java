@@ -21,7 +21,7 @@ public class NotaFiscal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idNotaFiscal;
 
     @Column(name = "valorNota", nullable = false)
     private Double valorNota;
@@ -29,8 +29,8 @@ public class NotaFiscal {
     @Column(name = "dataEmissao", nullable = false)
     private Date dataEmissao;
 
-    public NotaFiscal(Long id, Double valorNota, String dataEmissao){
-        this.id = id;
+    public NotaFiscal(Long idNotaFiscal, Double valorNota, String dataEmissao){
+        this.idNotaFiscal = idNotaFiscal;
         this.valorNota = valorNota;
         try{
             this.dataEmissao = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmissao);
