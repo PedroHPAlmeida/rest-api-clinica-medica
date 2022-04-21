@@ -13,12 +13,16 @@ import java.util.Optional;
 public class EntradaSaidaMaterialService {
 
     @Autowired
-    private IEntradaSaidaMaterialRepository entradaSaidaMaterialRepository;
-    @Autowired
     private IMaterialRepository materialRepository;
+    @Autowired
+    private IEntradaSaidaMaterialRepository entradaSaidaMaterialRepository;
+
+    @Autowired
+    private FuncionarioService funcionarioService;
 
     public EntradaSaidaMaterial salvarEntradaSaidaMaterial(EntradaSaidaMaterial entradaSaidaMaterial){
         materialRepository.save(entradaSaidaMaterial.getMaterial());
+        funcionarioService.salvarFuncionario(entradaSaidaMaterial.getFuncionario());
         return entradaSaidaMaterialRepository.save(entradaSaidaMaterial);
     }
 

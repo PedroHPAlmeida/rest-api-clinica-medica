@@ -31,9 +31,13 @@ public class EntradaSaidaMaterial {
     @ManyToOne(optional = false)
     private Material material;
 
-    public EntradaSaidaMaterial(Long quantidade, String descricao, Material material){
+    @ManyToOne(optional = false)
+    private Funcionario funcionario;
+
+    public EntradaSaidaMaterial(Long quantidade, String descricao, Material material, Funcionario funcionario){
         this.quantidade = quantidade;
         this.descricao = descricao;
         this.material = material;
+        this.funcionario = funcionario;
     }
 }
