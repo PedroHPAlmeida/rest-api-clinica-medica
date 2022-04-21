@@ -49,13 +49,4 @@ public class FuncionarioController {
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
     }
 
-    @DeleteMapping(path = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletarFuncionarioPorId(@PathVariable Long id){
-        funcionarioService.buscarFuncionarioPorId(id)
-                .map(funcionario -> {
-                    funcionarioService.deletarFuncionarioPorId(id);
-                    return Void.TYPE;
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
-    }
 }
