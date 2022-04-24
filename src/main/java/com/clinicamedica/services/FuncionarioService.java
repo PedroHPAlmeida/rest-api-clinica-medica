@@ -19,15 +19,14 @@ public class FuncionarioService {
     @Autowired
     private EspecialidadeService especialidadeService;
 
-    public Funcionario salvarFuncionario(Funcionario funcionario){
+    public void salvarFuncionario(Funcionario funcionario){
         if(funcionario.getEspecialidade() != null){
             especialidadeService.salvarEspecialidade(funcionario.getEspecialidade());
         }
         Optional<Funcionario> optionalFuncionario = buscarFuncionarioPorEmail(funcionario.getEmail());
         if(optionalFuncionario.isEmpty()){
-            return funcionarioRepository.save(funcionario);
+            funcionarioRepository.save(funcionario);
         }
-        return new Funcionario();
     }
 
     public List<Funcionario> listarFuncionarios(){
