@@ -43,10 +43,10 @@ public class MaterialController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Material não encontrado."));
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/alterarmaterial")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterarMaterialPorId(@PathVariable Long id, @RequestBody Material material){
-        materialService.buscarMaterialPorId(id)
+    public void alterarMaterialPorId(@RequestBody Material material){
+        materialService.buscarMaterialPorId(material.getIdMaterial())
                 .map(materialBase -> {
                     modelMapper.map(material, materialBase);
                     materialService.salvarMaterial(materialBase);
