@@ -19,19 +19,27 @@ public class MaterialService {
     private IMaterialRepository materialRepository;
 
     @Autowired
-    private ICategoriaMaterialRepository categoriaMaterialRepository;
+    private CategoriaMaterialService categoriaMaterialService;
 
     @Autowired
-    private IFabricanteRepository fabricanteRepository;
+    private FabricanteService fabricanteService;
 
     public Material salvarMaterial(Material material){
-        categoriaMaterialRepository.save(material.getCategoriaMaterial());
-        fabricanteRepository.save(material.getFabricante());
+        categoriaMaterialService.salvarCategoriaMaterial(material.getCategoriaMaterial());
+        fabricanteService.salvarFabricante(material.getFabricante());
         return materialRepository.save(material);
     }
 
     public List<Material> listarMateriais(){
         return materialRepository.findAll();
+    }
+
+    public List<Material> listarMateriaisPorCategoria(Long idCategoria) {
+        if(idCategoria == null){
+            return materialRepository.findAll();
+        }
+        Optional<CategoriaMaterial> categoriaMaterial = categoriaMaterialService.buscarCategoriaMaterialPorId(idCategoria);
+        return materialRepository.findByCategoriaMaterial(categoriaMaterial.get());
     }
 
     public Optional<Material> buscarMaterialPorId(Long id){
@@ -41,4 +49,5 @@ public class MaterialService {
     public void deletarMaterialPorId(Long id){
         materialRepository.deleteById(id);
     }
+
 }

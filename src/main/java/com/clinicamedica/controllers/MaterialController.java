@@ -43,6 +43,12 @@ public class MaterialController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Material não encontrado."));
     }
 
+    @GetMapping(path = "/idcategoria")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Material> listarMateriaisPorCategoria(@RequestParam(required = false) Long idCategoria){
+        return materialService.listarMateriaisPorCategoria(idCategoria);
+    }
+
     @PutMapping(path = "/alterarmaterial")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterarMaterialPorId(@RequestBody Material material){
