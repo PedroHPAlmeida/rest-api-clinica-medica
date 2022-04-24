@@ -1,6 +1,7 @@
 package com.clinicamedica.services;
 
 import com.clinicamedica.entities.Funcionario;
+import com.clinicamedica.entities.Login;
 import com.clinicamedica.repositories.IEspecialidadeRepository;
 import com.clinicamedica.repositories.IFuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class FuncionarioService {
     public Optional<Funcionario> buscarFuncionarioPorEmail(String email){
         return funcionarioRepository.findByEmail(email);
     }
+
+    public String buscarSenhaPeloEmail(String email){
+        return funcionarioRepository.getSenhaByEmail(email);
+    }
+
     public void deletarFuncionarioPorId(Long id){
         funcionarioRepository.deleteById(id);
     }

@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
     Optional<Funcionario> findByEmail(String email);
+    String getSenhaByEmail(String email);
 }

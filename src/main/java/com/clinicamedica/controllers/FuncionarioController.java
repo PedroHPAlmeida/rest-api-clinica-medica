@@ -1,7 +1,9 @@
 package com.clinicamedica.controllers;
 
 import com.clinicamedica.entities.Funcionario;
+import com.clinicamedica.entities.Login;
 import com.clinicamedica.services.FuncionarioService;
+import com.clinicamedica.services.LoginService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/funcionarios")
@@ -16,6 +19,8 @@ public class FuncionarioController {
 
     @Autowired
     private FuncionarioService funcionarioService;
+    @Autowired
+    private LoginService loginService;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -36,6 +41,13 @@ public class FuncionarioController {
     public Funcionario buscarFuncionarioPorId(@PathVariable Long id){
         return funcionarioService.buscarFuncionarioPorId(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
+    }
+
+    @GetMapping(path = "/login")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Funcionario verificarLogin(@RequestBody Login login){
+        return loginService.verificarLogin(login)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Senha ou email incorreto."));
     }
 
     @GetMapping(path = "/email/{email}")

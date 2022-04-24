@@ -16,7 +16,7 @@ public class Funcionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idFuncioario;
+    private Long idFuncionario;
 
     @Column(name = "nomeFuncionario", nullable = false)
     private String nomeFuncionario;
