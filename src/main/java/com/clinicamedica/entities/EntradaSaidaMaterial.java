@@ -34,6 +34,9 @@ public class EntradaSaidaMaterial {
     @ManyToOne(optional = false)
     private Funcionario funcionario;
 
+    @Column(name = "entradaOuSaida", nullable = false)
+    private String tipoEntradaSaida;
+
     public EntradaSaidaMaterial(Long quantidade, String descricao, Material material, Funcionario funcionario){
         this.quantidade = quantidade;
         this.descricao = descricao;

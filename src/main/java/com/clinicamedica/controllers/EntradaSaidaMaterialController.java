@@ -18,8 +18,8 @@ public class EntradaSaidaMaterialController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EntradaSaidaMaterial salvarEntradaSaidaMaterial(@RequestBody EntradaSaidaMaterial entradaSaidaMaterial){
-        return entradaSaidaMaterialService.salvarEntradaSaidaMaterial(entradaSaidaMaterial);
+    public void salvarEntradaSaidaMaterial(@RequestBody EntradaSaidaMaterial entradaSaidaMaterial){
+        entradaSaidaMaterialService.salvarEntradaSaidaMaterial(entradaSaidaMaterial);
     }
 
     @GetMapping
