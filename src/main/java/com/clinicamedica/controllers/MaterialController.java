@@ -26,8 +26,8 @@ public class MaterialController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Material salvarMaterial(@RequestBody Material material){
-        return materialService.salvarMaterial(material);
+    public void salvarMaterial(@RequestBody Material material){
+        materialService.salvarMaterial(material);
     }
 
     @GetMapping
