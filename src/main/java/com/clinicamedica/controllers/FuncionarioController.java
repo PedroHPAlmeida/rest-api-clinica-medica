@@ -25,9 +25,9 @@ public class FuncionarioController {
     private ModelMapper modelMapper;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Funcionario salvarFuncionario(@RequestBody Funcionario funcionario){
-        return funcionarioService.salvarFuncionario(funcionario);
+    @ResponseStatus(HttpStatus.OK)
+    public void salvarFuncionario(@RequestBody Funcionario funcionario){
+        funcionarioService.salvarFuncionario(funcionario);
     }
 
     @GetMapping
