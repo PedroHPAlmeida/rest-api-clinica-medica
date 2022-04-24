@@ -57,10 +57,10 @@ public class FuncionarioController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/alterarfuncionario")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterarFuncionarioPorId(@PathVariable Long id, @RequestBody Funcionario funcionario){
-        funcionarioService.buscarFuncionarioPorId(id)
+    public void alterarFuncionarioPorId(@RequestBody Funcionario funcionario){
+        funcionarioService.buscarFuncionarioPorId(funcionario.getIdFuncionario())
                 .map(funcionarioBase -> {
                     modelMapper.map(funcionario, funcionarioBase);
                     funcionarioService.salvarFuncionario(funcionarioBase);
