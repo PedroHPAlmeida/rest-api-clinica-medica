@@ -23,7 +23,11 @@ public class FuncionarioService {
         if(funcionario.getEspecialidade() != null){
             especialidadeService.salvarEspecialidade(funcionario.getEspecialidade());
         }
-        return funcionarioRepository.save(funcionario);
+        Optional<Funcionario> optionalFuncionario = buscarFuncionarioPorEmail(funcionario.getEmail());
+        if(optionalFuncionario.isEmpty()){
+            return funcionarioRepository.save(funcionario);
+        }
+        return new Funcionario();
     }
 
     public List<Funcionario> listarFuncionarios(){
