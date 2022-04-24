@@ -19,9 +19,9 @@ public class ServicoController {
     private ModelMapper modelMapper;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Servico salvarServico(@RequestBody Servico servico){
-        return servicoService.salvarServico(servico);
+    @ResponseStatus(HttpStatus.OK)
+    public void salvarServico(@RequestBody Servico servico){
+        servicoService.salvarServico(servico);
     }
 
     @GetMapping

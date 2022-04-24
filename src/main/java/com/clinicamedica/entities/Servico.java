@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Servico {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idServico;
 
     @Column(name = "nomeServico", nullable = false)
@@ -26,4 +26,7 @@ public class Servico {
 
     @Column(name = "descricaoServico")
     private String descricaoServico;
+
+    @ManyToOne(optional = false)
+    private Especialidade especialidade;
 }

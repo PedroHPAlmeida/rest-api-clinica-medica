@@ -14,7 +14,11 @@ public class ServicoService {
     @Autowired
     private IServicoRepository servicoRepository;
 
+    @Autowired
+    private EspecialidadeService especialidadeService;
+
     public Servico salvarServico(Servico servico){
+        especialidadeService.salvarEspecialidade(servico.getEspecialidade());
         return servicoRepository.save(servico);
     }
 
