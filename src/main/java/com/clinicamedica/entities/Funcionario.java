@@ -30,6 +30,12 @@ public class Funcionario {
     @Column(name = "setor", nullable = false)
     private String setor;
 
-    @Column(name = "tipoUsuario", nullable = false)
-    private String tipoUsuario;
+    @Column(name = "tipoFuncionario", nullable = false)
+    private String tipoFuncionario;
+
+    @Column(name = "crm")
+    private String crm;
+
+    @ManyToOne
+    private Especialidade especialidade;
 }

@@ -38,6 +38,13 @@ public class FuncionarioController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
     }
 
+    @GetMapping(path = "/email/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public Funcionario buscarFuncionarioPorEmail(@PathVariable String email){
+        return funcionarioService.buscarFuncionarioPorEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
+    }
+
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterarFuncionarioPorId(@PathVariable Long id, @RequestBody Funcionario funcionario){
