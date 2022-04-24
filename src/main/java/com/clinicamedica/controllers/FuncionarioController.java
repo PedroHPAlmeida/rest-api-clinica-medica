@@ -57,6 +57,13 @@ public class FuncionarioController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
     }
 
+    @GetMapping(path = "/tipofuncionario")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Funcionario> buscarFuncionarioPorTipo(@RequestParam(required = false) String tipoFuncionario){
+        System.out.println(tipoFuncionario);
+        return funcionarioService.listarFuncionariosPorTipo(tipoFuncionario);
+    }
+
     @PutMapping(path = "/alterarfuncionario")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterarFuncionarioPorId(@RequestBody Funcionario funcionario){

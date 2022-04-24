@@ -45,6 +45,14 @@ public class FuncionarioService {
         return funcionarioRepository.getSenhaByEmail(email);
     }
 
+    public List<Funcionario> listarFuncionariosPorTipo(String tipoFuncionario){
+        System.out.println(tipoFuncionario);
+        if(tipoFuncionario.equals(null)){
+            return funcionarioRepository.findAll();
+        }
+        return funcionarioRepository.findByTipoFuncionario(tipoFuncionario);
+    }
+
     public void deletarFuncionarioPorId(Long id){
         funcionarioRepository.deleteById(id);
     }
