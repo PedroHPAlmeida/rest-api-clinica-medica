@@ -1,11 +1,13 @@
 package com.clinicamedica.services;
 
 import com.clinicamedica.entities.EntradaSaidaMaterial;
+import com.clinicamedica.entities.Material;
 import com.clinicamedica.repositories.IEntradaSaidaMaterialRepository;
 import com.clinicamedica.repositories.IMaterialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +15,7 @@ import java.util.Optional;
 public class EntradaSaidaMaterialService {
 
     @Autowired
-    private IMaterialRepository materialRepository;
+    private MaterialService materialService;
     @Autowired
     private IEntradaSaidaMaterialRepository entradaSaidaMaterialRepository;
 
@@ -21,7 +23,7 @@ public class EntradaSaidaMaterialService {
     private FuncionarioService funcionarioService;
 
     public EntradaSaidaMaterial salvarEntradaSaidaMaterial(EntradaSaidaMaterial entradaSaidaMaterial){
-        materialRepository.save(entradaSaidaMaterial.getMaterial());
+        materialService.salvarMaterial(entradaSaidaMaterial.getMaterial());
         funcionarioService.salvarFuncionario(entradaSaidaMaterial.getFuncionario());
         return entradaSaidaMaterialRepository.save(entradaSaidaMaterial);
     }
@@ -32,5 +34,13 @@ public class EntradaSaidaMaterialService {
 
     public Optional<EntradaSaidaMaterial> buscarEntradaSaidaMaterialPorId(Long id){
         return entradaSaidaMaterialRepository.findById(id);
+    }
+
+    public List<EntradaSaidaMaterial> buscarEntradaSaidaMaterialPorIdMaterial(Long idMaterial) {
+        Optional<Material> optionalMaterial = materialService.buscarMaterialPorId(idMaterial);
+        if(!optionalMaterial.isEmpty()){
+            return entradaSaidaMaterialRepository.findByMaterial(optionalMaterial.get());
+        }
+        return Collections.emptyList();
     }
 }

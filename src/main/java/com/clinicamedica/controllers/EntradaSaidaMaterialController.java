@@ -28,10 +28,9 @@ public class EntradaSaidaMaterialController {
         return entradaSaidaMaterialService.listarEntradasSaidasMateriais();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/buscarporidmaterial/{idMaterial}")
     @ResponseStatus(HttpStatus.OK)
-    public EntradaSaidaMaterial buscarEntradaSaidaMaterialPorId(@PathVariable Long id){
-        return entradaSaidaMaterialService.buscarEntradaSaidaMaterialPorId(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Entrada/Saída de material não encontrada."));
+    public List<EntradaSaidaMaterial> listarEntradasSaidasMateriaisPorIdMaterial(@PathVariable Long idMaterial){
+        return entradaSaidaMaterialService.buscarEntradaSaidaMaterialPorIdMaterial(idMaterial);
     }
 }
