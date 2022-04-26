@@ -1,5 +1,6 @@
 package com.clinicamedica.services;
 
+import com.clinicamedica.entities.Especialidade;
 import com.clinicamedica.entities.Funcionario;
 import com.clinicamedica.entities.Login;
 import com.clinicamedica.repositories.IEspecialidadeRepository;
@@ -7,6 +8,7 @@ import com.clinicamedica.repositories.IFuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,5 +57,13 @@ public class FuncionarioService {
 
     public void deletarFuncionarioPorId(Long id){
         funcionarioRepository.deleteById(id);
+    }
+
+    public List<Funcionario> listarMedicosPorIdEspecialidade(Long idEspecialidade) {
+         Optional<Especialidade> especialidadeOptional = especialidadeService.buscarEspecialidadePorId(idEspecialidade);
+         if(!especialidadeOptional.isEmpty()){
+             return funcionarioRepository.findByEspecialidade(especialidadeOptional.get());
+         }
+         return Collections.emptyList();
     }
 }

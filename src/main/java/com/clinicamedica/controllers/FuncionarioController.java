@@ -64,6 +64,12 @@ public class FuncionarioController {
         return funcionarioService.listarFuncionariosPorTipo(tipoFuncionario);
     }
 
+    @GetMapping(path = "/listar-medicos-por-especialidade")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Funcionario> listarMedicosPorIdEspecialidade(@RequestParam(required = false) Long idEspecialidade){
+        return funcionarioService.listarMedicosPorIdEspecialidade(idEspecialidade);
+    }
+
     @PutMapping(path = "/alterarfuncionario")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterarFuncionarioPorId(@RequestBody Funcionario funcionario){

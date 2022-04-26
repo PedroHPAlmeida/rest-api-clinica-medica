@@ -1,6 +1,7 @@
 package com.clinicamedica.repositories;
 
 
+import com.clinicamedica.entities.Especialidade;
 import com.clinicamedica.entities.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +13,5 @@ public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long>
     Optional<Funcionario> findByEmail(String email);
     String getSenhaByEmail(String email);
     List<Funcionario> findByTipoFuncionario(String tipoFuncionario);
+    List<Funcionario> findByEspecialidade(Especialidade especialidade);
 }
