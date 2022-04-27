@@ -30,14 +30,18 @@ public class Funcionario {
     @Column(name = "tipoFuncionario", nullable = false)
     private String tipoFuncionario;
 
+    @Column(name = "statusFuncionario", nullable = false)
+    private int statusFuncionario;
+
     public Funcionario() {
     }
 
-    public Funcionario(String nomeFuncionario, String email, String senha, String setor, String tipoFuncionario) {
+    public Funcionario(String nomeFuncionario, String email, String senha, String setor, String tipoFuncionario, int statusFuncionario) {
         this.nomeFuncionario = nomeFuncionario;
         this.email = email;
         this.senha = senha;
         this.setor = setor;
         this.tipoFuncionario = tipoFuncionario;
+        this.statusFuncionario = statusFuncionario;
     }
 }
