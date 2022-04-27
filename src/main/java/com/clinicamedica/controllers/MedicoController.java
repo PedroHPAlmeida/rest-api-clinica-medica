@@ -26,4 +26,10 @@ public class MedicoController {
     public List<Medico> listarMedicos(){
         return medicoService.listarMedicos();
     }
+
+    @GetMapping(path = "/listar-por-id-especialidade")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Medico> listarMedicosPorIdEspecialidade(@RequestParam(required = false) Long idEspecialidade){
+        return medicoService.listarMedicosPorIdEspecialidade(idEspecialidade);
+    }
 }
