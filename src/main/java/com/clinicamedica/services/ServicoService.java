@@ -1,5 +1,6 @@
 package com.clinicamedica.services;
 
+import com.clinicamedica.entities.Especialidade;
 import com.clinicamedica.entities.Servico;
 import com.clinicamedica.repositories.IServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ public class ServicoService {
     private EspecialidadeService especialidadeService;
 
     public Servico salvarServico(Servico servico){
-        especialidadeService.salvarEspecialidade(servico.getEspecialidade());
+        if(servico.getEspecialidade().getIdEspecialidade() == null){
+            especialidadeService.salvarEspecialidade(servico.getEspecialidade());
+        }
         return servicoRepository.save(servico);
     }
 
