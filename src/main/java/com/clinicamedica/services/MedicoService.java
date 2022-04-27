@@ -1,6 +1,7 @@
 package com.clinicamedica.services;
 
 import com.clinicamedica.entities.Especialidade;
+import com.clinicamedica.entities.Funcionario;
 import com.clinicamedica.entities.Medico;
 import com.clinicamedica.repositories.IMedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,19 @@ import java.util.Optional;
 public class MedicoService{
     @Autowired
     private IMedicoRepository medicoRepository;
-
     @Autowired
     private EspecialidadeService especialidadeService;
+    @Autowired
+    private FuncionarioService funcionarioService;
 
-    public Medico salvarMedico(Medico medico){
-        if(medico.getEspecialidade().getIdEspecialidade() == null){
-            especialidadeService.salvarEspecialidade(medico.getEspecialidade());
+    public void salvarMedico(Medico medico){
+        Optional<Funcionario> funcionario = funcionarioService.buscarFuncionarioPorEmail(medico.getEmail());
+        if(funcionario.isEmpty()) {
+            if (medico.getEspecialidade().getIdEspecialidade() == null) {
+                especialidadeService.salvarEspecialidade(medico.getEspecialidade());
+            }
+            medicoRepository.save(medico);
         }
-        return medicoRepository.save(medico);
     }
 
     public List<Medico> listarMedicos(){
