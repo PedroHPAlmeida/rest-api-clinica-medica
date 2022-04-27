@@ -1,17 +1,14 @@
 package com.clinicamedica.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 @Entity(name = "funcionarios")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Funcionario {
 
     @Id
@@ -33,9 +30,14 @@ public class Funcionario {
     @Column(name = "tipoFuncionario", nullable = false)
     private String tipoFuncionario;
 
-    @Column(name = "crm")
-    private String crm;
+    public Funcionario() {
+    }
 
-    @ManyToOne
-    private Especialidade especialidade;
+    public Funcionario(String nomeFuncionario, String email, String senha, String setor, String tipoFuncionario) {
+        this.nomeFuncionario = nomeFuncionario;
+        this.email = email;
+        this.senha = senha;
+        this.setor = setor;
+        this.tipoFuncionario = tipoFuncionario;
+    }
 }

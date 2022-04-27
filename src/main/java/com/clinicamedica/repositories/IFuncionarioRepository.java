@@ -13,5 +13,4 @@ public interface IFuncionarioRepository extends JpaRepository<Funcionario, Long>
     Optional<Funcionario> findByEmail(String email);
     String getSenhaByEmail(String email);
     List<Funcionario> findByTipoFuncionario(String tipoFuncionario);
-    List<Funcionario> findByEspecialidade(Especialidade especialidade);
 }
