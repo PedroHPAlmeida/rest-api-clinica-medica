@@ -35,4 +35,7 @@ public class Material {
 
     @ManyToOne(optional = false)
     private Fabricante fabricante;
+
+    @Column(name = "statusMaterial", nullable = false)
+    private int statusMaterial;
 }
