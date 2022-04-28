@@ -65,7 +65,6 @@ public class FuncionarioController {
     @GetMapping(path = "/tipofuncionario")
     @ResponseStatus(HttpStatus.OK)
     public List<Funcionario> buscarFuncionarioPorTipo(@RequestParam(required = false) String tipoFuncionario){
-        System.out.println(tipoFuncionario);
         return funcionarioService.listarFuncionariosPorTipo(tipoFuncionario);
     }
 

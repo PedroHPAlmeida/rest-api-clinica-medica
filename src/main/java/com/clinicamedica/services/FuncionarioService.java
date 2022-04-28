@@ -62,8 +62,8 @@ public class FuncionarioService {
     }
 
     public List<Funcionario> listarFuncionariosPorTipo(String tipoFuncionario){
-        if(tipoFuncionario.equals(null)){
-            return funcionarioRepository.findAll();
+        if(tipoFuncionario == null || tipoFuncionario.equals("")){
+               return funcionarioRepository.findAll();
         }
         return funcionarioRepository.findByTipoFuncionario(tipoFuncionario);
     }
