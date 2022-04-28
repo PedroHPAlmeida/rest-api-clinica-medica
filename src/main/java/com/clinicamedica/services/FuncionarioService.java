@@ -20,13 +20,25 @@ public class FuncionarioService {
         if(!emailJaExiste){
             funcionarioRepository.save(funcionario);
         } else {
-            System.err.println("Email já cadastrado no sistema.");
-            throw new FuncionarioException("Email já cadastrado");
+            System.err.println("Email já cadastrado no sistema, tente outro.");
+            throw new FuncionarioException("Email já cadastrado no sistema, tente outro.");
         }
     }
 
     public void alterarFuncionario(Funcionario funcionarioAlterado){
-        
+        Funcionario funcionario = this.buscarFuncionarioPorId(funcionarioAlterado.getIdFuncionario()).get();
+        boolean emailFoiAlterado = !funcionario.getEmail().equals(funcionarioAlterado.getEmail());
+        if(emailFoiAlterado){
+            boolean emailJaExiste = this.contarEmailsRepetidos(funcionarioAlterado.getEmail()) > 0 ? true : false;
+            if(emailJaExiste){
+                System.err.println("Email já cadastrado no sistema, tente outro.");
+                throw new FuncionarioException("Email já cadastrado no sistema, tente outro.");
+            } else {
+                funcionarioRepository.save(funcionarioAlterado);
+            }
+        } else {
+            funcionarioRepository.save(funcionarioAlterado);
+        }
     }
 
     public List<Funcionario> listarFuncionarios(){

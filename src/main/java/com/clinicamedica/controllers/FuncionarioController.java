@@ -69,19 +69,13 @@ public class FuncionarioController {
         return funcionarioService.listarFuncionariosPorTipo(tipoFuncionario);
     }
 
-    /*@PutMapping(path = "/alterarfuncionario")
+    @PutMapping(path = "/alterar-funcionario")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterarFuncionario(@RequestBody Funcionario funcionario){
-        funcionarioService.buscarFuncionarioPorId(funcionario.getIdFuncionario())
-                .map(funcionarioBase -> {
-                    modelMapper.map(funcionario, funcionarioBase);
-                    funcionarioService.salvarFuncionario(funcionarioBase);
-                    return Void.TYPE;
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
-    }*/
-    @PutMapping(path = "/alterarfuncionario")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterarFuncionario(@RequestBody Funcionario funcionario){
-        funcionarioService.alterarFuncionario(funcionario);
+        try {
+            funcionarioService.alterarFuncionario(funcionario);
+        } catch (FuncionarioException exception){
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Email já cadastrado, tente outro.");
+        }
     }
 }
