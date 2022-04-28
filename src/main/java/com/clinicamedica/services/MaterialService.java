@@ -25,8 +25,12 @@ public class MaterialService {
     private FabricanteService fabricanteService;
 
     public Material salvarMaterial(Material material){
-        categoriaMaterialService.salvarCategoriaMaterial(material.getCategoriaMaterial());
-        fabricanteService.salvarFabricante(material.getFabricante());
+        if(material.getIdMaterial() == null){
+            categoriaMaterialService.salvarCategoriaMaterial(material.getCategoriaMaterial());
+        }
+        if(material.getFabricante().getCnpj() == null){
+            fabricanteService.salvarFabricante(material.getFabricante());
+        }
         return materialRepository.save(material);
     }
 
