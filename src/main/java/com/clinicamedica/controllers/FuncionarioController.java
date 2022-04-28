@@ -2,6 +2,7 @@ package com.clinicamedica.controllers;
 
 import com.clinicamedica.entities.Funcionario;
 import com.clinicamedica.entities.Login;
+import com.clinicamedica.exceptions.FuncionarioException;
 import com.clinicamedica.services.FuncionarioService;
 import com.clinicamedica.services.LoginService;
 import org.modelmapper.ModelMapper;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/funcionarios")
@@ -27,7 +27,12 @@ public class FuncionarioController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void salvarFuncionario(@RequestBody Funcionario funcionario){
-        funcionarioService.salvarFuncionario(funcionario);
+        try{
+            funcionarioService.salvarFuncionario(funcionario);
+        }
+        catch (FuncionarioException exception){
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Email já cadastrado, tente outro.");
+        }
     }
 
     @GetMapping
@@ -64,21 +69,19 @@ public class FuncionarioController {
         return funcionarioService.listarFuncionariosPorTipo(tipoFuncionario);
     }
 
- /*   @GetMapping(path = "/listar-medicos-por-especialidade")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Funcionario> listarMedicosPorIdEspecialidade(@RequestParam(required = false) Long idEspecialidade){
-        return funcionarioService.listarMedicosPorIdEspecialidade(idEspecialidade);
-    }*/
-
-    @PutMapping(path = "/alterarfuncionario")
+    /*@PutMapping(path = "/alterarfuncionario")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void alterarFuncionarioPorId(@RequestBody Funcionario funcionario){
+    public void alterarFuncionario(@RequestBody Funcionario funcionario){
         funcionarioService.buscarFuncionarioPorId(funcionario.getIdFuncionario())
                 .map(funcionarioBase -> {
                     modelMapper.map(funcionario, funcionarioBase);
                     funcionarioService.salvarFuncionario(funcionarioBase);
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
+    }*/
+    @PutMapping(path = "/alterarfuncionario")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alterarFuncionario(@RequestBody Funcionario funcionario){
+        funcionarioService.alterarFuncionario(funcionario);
     }
-
 }
