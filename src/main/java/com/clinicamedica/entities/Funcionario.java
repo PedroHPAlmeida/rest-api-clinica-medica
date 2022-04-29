@@ -28,7 +28,7 @@ public class Funcionario {
     private String setor;
 
     @Column(name = "tipoFuncionario", nullable = false)
-    private String tipoFuncionario;
+    private int tipoFuncionario;
 
     @Column(name = "statusFuncionario", nullable = false)
     private int statusFuncionario;
@@ -36,7 +36,7 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    public Funcionario(String nomeFuncionario, String email, String senha, String setor, String tipoFuncionario, int statusFuncionario) {
+    public Funcionario(String nomeFuncionario, String email, String senha, String setor, int tipoFuncionario, int statusFuncionario) {
         this.nomeFuncionario = nomeFuncionario;
         this.email = email;
         this.senha = senha;

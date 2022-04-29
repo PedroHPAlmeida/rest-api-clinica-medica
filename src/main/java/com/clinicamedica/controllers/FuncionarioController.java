@@ -48,7 +48,7 @@ public class FuncionarioController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado."));
     }
 
-    @GetMapping(path = "/login")
+    @PostMapping(path = "/login")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Funcionario verificarLogin(@RequestBody Login login){
         return loginService.verificarLogin(login)

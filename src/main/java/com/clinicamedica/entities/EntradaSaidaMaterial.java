@@ -35,7 +35,7 @@ public class EntradaSaidaMaterial {
     private Funcionario funcionario;
 
     @Column(name = "entradaOuSaida", nullable = false)
-    private String tipoEntradaSaida;
+    private int tipoEntradaSaida;
 
     public EntradaSaidaMaterial(Long quantidade, String descricao, Material material, Funcionario funcionario){
         this.quantidade = quantidade;
