@@ -70,4 +70,9 @@ public class MedicoService{
         }
         return Collections.emptyList();
     }
+
+    public Optional<Medico> buscarMedicoPorId(Long id){
+        return medicoRepository.findById(id);
+    }
+
 }
