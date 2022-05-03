@@ -21,6 +21,9 @@ public class Agendamento {
     @ManyToOne(optional = false)
     private Paciente paciente;
 
+    @ManyToOne(optional = false)
+    private Medico medico;
+
     @Column(name = "data")
     private LocalDate data = LocalDate.now();
 
@@ -38,9 +41,10 @@ public class Agendamento {
 
     public Agendamento() {
     }
-    public Agendamento(Funcionario recepcionista, Paciente paciente, LocalDate dataAgendada, LocalTime horaAgendada, Servico servico, int status) {
+    public Agendamento(Funcionario recepcionista, Paciente paciente, Medico medico, LocalDate dataAgendada, LocalTime horaAgendada, Servico servico, int status) {
         this.recepcionista = recepcionista;
         this.paciente = paciente;
+        this.medico = medico;
         this.dataAgendada = dataAgendada;
         this.horaAgendada = horaAgendada;
         this.servico = servico;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,8 +34,13 @@ public class AgendamentoService {
         Servico servico = servicoService.buscarServicoPorId(agendamentoView.getServicoId()).get();
         int status = agendamentoView.getStatus();
 
-        Agendamento agendamento = new Agendamento(recepcionista, paciente, dataAgendada, horaAgendada, servico, status);
+        Agendamento agendamento = new Agendamento(recepcionista, paciente, medico, dataAgendada, horaAgendada, servico, status);
 
         agendamentoRepository.save(agendamento);
     }
+
+    public List<Agendamento> listarAgendamentos(){
+        return agendamentoRepository.findAll();
+    }
+
 }
