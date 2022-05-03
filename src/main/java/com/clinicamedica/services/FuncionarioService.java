@@ -61,8 +61,8 @@ public class FuncionarioService {
         return funcionarioRepository.countByEmail(email);
     }
 
-    public List<Funcionario> listarFuncionariosPorTipo(String tipoFuncionario){
-        if(tipoFuncionario == null || tipoFuncionario.equals("")){
+    public List<Funcionario> listarFuncionariosPorTipo(int tipoFuncionario){
+        if(tipoFuncionario == 0){
                return funcionarioRepository.findAll();
         }
         return funcionarioRepository.findByTipoFuncionario(tipoFuncionario);
