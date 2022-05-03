@@ -34,6 +34,13 @@ public class MedicoController {
         return medicoService.listarMedicos();
     }
 
+    @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Medico buscarMedicoPorId(@PathVariable Long id){
+        return medicoService.buscarMedicoPorId(id).
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Médico não encontrado."));
+    }
+
     @GetMapping(path = "/listar-por-id-especialidade")
     @ResponseStatus(HttpStatus.OK)
     public List<Medico> listarMedicosPorIdEspecialidade(@RequestParam(required = false) Long idEspecialidade){
