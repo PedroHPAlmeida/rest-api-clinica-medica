@@ -6,10 +6,12 @@ import com.clinicamedica.views.AgendamentoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.spec.OAEPParameterSpec;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -40,6 +42,9 @@ public class AgendamentoService {
         agendamentoRepository.save(agendamento);
     }
 
+    public void salvarAgendamento(Agendamento agendamento){
+        agendamentoRepository.save(agendamento);
+    }
     public List<Agendamento> listarAgendamentos(){
         return agendamentoRepository.findAll();
     }
@@ -65,5 +70,9 @@ public class AgendamentoService {
             agendamentos.addAll(agendamentosStatus);
         }
         return agendamentos;
+    }
+
+    public Optional<Agendamento> buscarAgendamentoPorId(Long id){
+        return agendamentoRepository.findById(id);
     }
 }
