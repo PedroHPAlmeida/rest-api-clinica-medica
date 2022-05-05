@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AgendamentoService {
@@ -43,4 +44,26 @@ public class AgendamentoService {
         return agendamentoRepository.findAll();
     }
 
+    public List<Agendamento> listarAgendamentosPorPaciente(String cpf){
+        Paciente paciente = pacienteService.buscarPacientePorCpf(cpf).get();
+        return agendamentoRepository.findByPaciente(paciente);
+    }
+
+    public List<Agendamento> listarAgendamentosPorStatus(Integer status){
+        return agendamentoRepository.findByStatus(status);
+    }
+    public Set<Agendamento> listarAgendamentosPorCpfEStatus(String cpf, Integer status){
+        Set<Agendamento> agendamentos = new HashSet<>();
+        if(cpf != null && !cpf.equals("")){
+            List<Agendamento> agendamentosPaciente = listarAgendamentosPorPaciente(cpf);
+            agendamentos.addAll(agendamentosPaciente);
+        }
+        if(agendamentos.size() > 0 && status != null){
+            agendamentos.removeIf(agendamento -> agendamento.getStatus() != status);
+        } else if(status != null){
+            List<Agendamento> agendamentosStatus = listarAgendamentosPorStatus(status);
+            agendamentos.addAll(agendamentosStatus);
+        }
+        return agendamentos;
+    }
 }

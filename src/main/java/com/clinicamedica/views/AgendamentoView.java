@@ -17,5 +17,5 @@ public class AgendamentoView {
     private LocalDate dataAgendada;
     private LocalTime horaAgendada;
     private Long servicoId;
-    private int status;
+    private Integer status;
 }

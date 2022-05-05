@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/api/agendamentos")
@@ -29,5 +30,11 @@ public class AgendamentoController {
     @ResponseStatus(HttpStatus.OK)
     public List<Agendamento> listarAgendamentos(){
         return agendamentoService.listarAgendamentos();
+    }
+
+    @GetMapping(path = "/listar-por-cpf-e-status")
+    @ResponseStatus(HttpStatus.OK)
+    public Set<Agendamento> listarAgendamentosPorCpfEStatus(@RequestParam(required = false) String cpf, @RequestParam(required = false) Integer status){
+        return agendamentoService.listarAgendamentosPorCpfEStatus(cpf, status);
     }
 }

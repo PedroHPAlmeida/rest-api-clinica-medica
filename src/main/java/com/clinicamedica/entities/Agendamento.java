@@ -37,7 +37,7 @@ public class Agendamento {
     private Servico servico;
 
     @Column(name = "status")
-    private int status;
+    private Integer status;
 
     public Agendamento() {
     }
