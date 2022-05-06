@@ -29,6 +29,13 @@ public class PagamentoController {
         return pagamentoService.listarPagamentos();
     }
 
+    @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Pagamento buscarPagamentoPeloId(@PathVariable Long id){
+        return pagamentoService.buscarPagamentoPorId(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pagamento não encontrado."));
+    }
+
     @GetMapping(path = "/buscar-por-id-agendamento/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Pagamento buscarPagamentoPorIdAgendamento(@PathVariable Long id){
