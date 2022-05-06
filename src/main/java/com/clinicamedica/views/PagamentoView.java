@@ -9,6 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PagamentoView {
 
+    private Long idAgendamento;
     private Double valor;
     private Integer status;
     private Integer formaDePagamento;

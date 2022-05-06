@@ -20,6 +20,9 @@ public class Pagamento {
     private Long idPagamento;
 
     @OneToOne
+    private Agendamento agendamento;
+
+    @OneToOne
     private NotaFiscal notaFiscal;
 
     @Column(nullable = false)
@@ -37,7 +40,8 @@ public class Pagamento {
     @Column()
     private Double desconto;
 
-    public Pagamento(NotaFiscal notaFiscal, Double valor, Integer status, Integer formaDePagamento, Double desconto) {
+    public Pagamento(Agendamento agendamento, NotaFiscal notaFiscal, Double valor, Integer status, Integer formaDePagamento, Double desconto) {
+        this.agendamento = agendamento;
         this.notaFiscal = notaFiscal;
         this.valor = valor;
         this.status = status;

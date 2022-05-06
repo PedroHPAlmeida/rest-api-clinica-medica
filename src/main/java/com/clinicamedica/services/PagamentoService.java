@@ -1,5 +1,6 @@
 package com.clinicamedica.services;
 
+import com.clinicamedica.entities.Agendamento;
 import com.clinicamedica.entities.Clinica;
 import com.clinicamedica.entities.NotaFiscal;
 import com.clinicamedica.entities.Pagamento;
@@ -20,8 +21,14 @@ public class PagamentoService {
     @Autowired
     private NotaFiscalService notaFiscalService;
 
+    @Autowired
+    private AgendamentoService agendamentoService;
+
     public Pagamento salvarPagamento(PagamentoView pagamentoView){
         Pagamento pagamento = new Pagamento();
+
+        Agendamento agendamento = agendamentoService.buscarAgendamentoPorId(pagamentoView.getIdAgendamento()).get();
+        pagamento.setAgendamento(agendamento);
         pagamento.setFormaDePagamento(pagamentoView.getFormaDePagamento());
         pagamento.setDesconto(pagamentoView.getDesconto());
         pagamento.setStatus(pagamentoView.getStatus());
