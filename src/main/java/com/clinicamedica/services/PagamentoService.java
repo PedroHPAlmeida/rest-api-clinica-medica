@@ -7,9 +7,12 @@ import com.clinicamedica.entities.Pagamento;
 import com.clinicamedica.repositories.IPagamentoRepository;
 import com.clinicamedica.views.PagamentoView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PagamentoService {
@@ -45,5 +48,13 @@ public class PagamentoService {
 
     public List<Pagamento> listarPagamentos(){
         return pagamentoRepository.findAll();
+    }
+
+    public Optional<Pagamento> buscarPagamentoPorIdAgendamento(Long idAgendamento){
+        Optional<Agendamento> agendamento = agendamentoService.buscarAgendamentoPorId(idAgendamento);
+        if(agendamento.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Agendamento não encontrado.");
+        }
+        return pagamentoRepository.findByAgendamento(agendamento.get());
     }
 }
