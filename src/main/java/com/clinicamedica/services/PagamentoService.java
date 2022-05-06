@@ -57,4 +57,8 @@ public class PagamentoService {
         }
         return pagamentoRepository.findByAgendamento(agendamento.get());
     }
+
+    public Optional<Pagamento> buscarPagamentoPorId(Long id){
+        return pagamentoRepository.findById(id);
+    }
 }
