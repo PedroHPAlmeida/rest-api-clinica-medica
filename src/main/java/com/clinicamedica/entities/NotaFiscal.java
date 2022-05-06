@@ -1,41 +1,46 @@
 package com.clinicamedica.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-@Data
+import java.time.LocalDate;
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity(name = "notasFiscais")
 public class NotaFiscal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNotaFiscal;
+
+    @ManyToOne
+    private Clinica clinica;
 
     @Column(name = "valorNota", nullable = false)
     private Double valorNota;
 
     @Column(name = "dataEmissao", nullable = false)
-    private Date dataEmissao;
+    private LocalDate dataEmissao;
 
-    public NotaFiscal(Long idNotaFiscal, Double valorNota, String dataEmissao){
-        this.idNotaFiscal = idNotaFiscal;
+    @Column
+    private Double impostos = 0D;
+
+    public NotaFiscal(Clinica clinica, Double valorNota, LocalDate dataEmissao) {
+        this.clinica = clinica;
         this.valorNota = valorNota;
-        try{
-            this.dataEmissao = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmissao);
-        } catch (ParseException e) {
-            Logger.getLogger(NotaFiscal.class.getName()).log(Level.SEVERE, null, e);
-        }
+        this.dataEmissao = dataEmissao;
+    }
+
+    @Override
+    public String toString() {
+        return "NotaFiscal{" +
+                "idNotaFiscal=" + idNotaFiscal +
+                ", clinica=" + clinica +
+                ", valorNota=" + valorNota +
+                ", dataEmissao=" + dataEmissao +
+                ", impostos=" + impostos +
+                '}';
     }
 }
