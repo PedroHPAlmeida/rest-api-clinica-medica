@@ -27,10 +27,15 @@ public class NotaFiscal {
     @Column
     private Double impostos = 0D;
 
-    public NotaFiscal(Clinica clinica, Double valorNota, LocalDate dataEmissao) {
+    @Column
+    private String descricao;
+
+    public NotaFiscal(Clinica clinica, Double valorNota, LocalDate dataEmissao, Double impostos, String descricao) {
         this.clinica = clinica;
         this.valorNota = valorNota;
         this.dataEmissao = dataEmissao;
+        this.impostos = impostos;
+        this.descricao = descricao;
     }
 
     @Override

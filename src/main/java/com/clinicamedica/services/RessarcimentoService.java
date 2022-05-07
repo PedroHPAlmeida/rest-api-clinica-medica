@@ -33,7 +33,7 @@ public class RessarcimentoService {
         ressarcimento.setPagamento(pagamento);
 
         Clinica clinica = clinicaService.buscarClinicaPorId(1l).get();
-        NotaFiscal notaFiscal = new NotaFiscal(clinica, ressarcimentoView.getValor(), ressarcimento.getData());
+        NotaFiscal notaFiscal = new NotaFiscal(clinica, ressarcimentoView.getValor(), ressarcimento.getData(), 0D, ressarcimentoView.getMotivoRessarcimento());
         notaFiscalService.salvarNotaFiscal(notaFiscal);
         ressarcimento.setNotaFiscal(notaFiscal);
 
