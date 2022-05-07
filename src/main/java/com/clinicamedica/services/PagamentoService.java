@@ -23,7 +23,6 @@ public class PagamentoService {
     private ClinicaService clinicaService;
     @Autowired
     private NotaFiscalService notaFiscalService;
-
     @Autowired
     private AgendamentoService agendamentoService;
 
@@ -46,6 +45,10 @@ public class PagamentoService {
         return pagamentoRepository.save(pagamento);
     }
 
+    public Pagamento salvarPagamento(Pagamento pagamento){
+        return pagamentoRepository.save(pagamento);
+    }
+
     public List<Pagamento> listarPagamentos(){
         return pagamentoRepository.findAll();
     }
@@ -60,5 +63,8 @@ public class PagamentoService {
 
     public Optional<Pagamento> buscarPagamentoPorId(Long id){
         return pagamentoRepository.findById(id);
+    }
+
+    public void alterarPagamento(Pagamento pagamento, PagamentoView pagamentoView) {
     }
 }

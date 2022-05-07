@@ -3,6 +3,7 @@ package com.clinicamedica.controllers;
 import com.clinicamedica.entities.Pagamento;
 import com.clinicamedica.services.PagamentoService;
 import com.clinicamedica.views.PagamentoView;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ public class PagamentoController {
 
     @Autowired
     private PagamentoService pagamentoService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
@@ -41,5 +44,16 @@ public class PagamentoController {
     public Pagamento buscarPagamentoPorIdAgendamento(@PathVariable Long id){
         return pagamentoService.buscarPagamentoPorIdAgendamento(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pagamento não encontrado."));
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alterarPagamentoPorId(@RequestBody Pagamento pagamento){
+        pagamentoService.buscarPagamentoPorId(pagamento.getIdPagamento())
+                .map(pagamentoBase -> {
+                    modelMapper.map(pagamento, pagamentoBase);
+                    pagamentoService.salvarPagamento(pagamentoBase);
+                    return Void.TYPE;
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pagamento não encontrado."));
     }
 }
