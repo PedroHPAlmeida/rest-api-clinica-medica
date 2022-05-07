@@ -37,6 +37,12 @@ public class ServicoController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço não encontrado."));
     }
 
+    @GetMapping(path = "/listar-por-id-especialidade")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Servico> listarServicosPorIdEspecialidade(@RequestParam(required = false) Long id){
+        return servicoService.listarServicoPorIdEspecialidade(id);
+    }
+
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void alterarServicoPorId(@PathVariable Long id, @RequestBody Servico servico){
