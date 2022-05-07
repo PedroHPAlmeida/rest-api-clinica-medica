@@ -2,6 +2,7 @@ package com.clinicamedica.controllers;
 
 import com.clinicamedica.entities.Especialidade;
 import com.clinicamedica.services.EspecialidadeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ public class EspecialidadeController {
 
     @Autowired
     private EspecialidadeService especialidadeService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -33,5 +36,16 @@ public class EspecialidadeController {
     public Especialidade buscarEspecialidadePorId(@PathVariable Long id){
         return especialidadeService.buscarEspecialidadePorId(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Especialidade não encontrada."));
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void alterarEspecialidade(@RequestBody Especialidade especialidade){
+        especialidadeService.buscarEspecialidadePorId(especialidade.getIdEspecialidade())
+                .map(especialidadeBase -> {
+                    modelMapper.map(especialidade, especialidadeBase);
+                    especialidadeService.salvarEspecialidade(especialidadeBase);
+                    return Void.TYPE;
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Especialidade não encontrada."));
     }
 }
