@@ -25,7 +25,7 @@ public class Paciente {
     private LocalDate dataNascimento;
 
     @Column(name = "sexo", nullable = false)
-    private char sexo;
+    private Integer sexo;
 
     @Column(name = "endereco", nullable = false)
     private String endereco;
