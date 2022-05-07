@@ -7,9 +7,12 @@ import com.clinicamedica.entities.Ressarcimento;
 import com.clinicamedica.repositories.IRessarcimentoRepository;
 import com.clinicamedica.views.RessarcimentoView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RessarcimentoService {
@@ -44,5 +47,11 @@ public class RessarcimentoService {
 
     public List<Ressarcimento> listarRessarcimentos(){
         return ressarcimentoRepository.findAll();
+    }
+
+    public Optional<Ressarcimento> buscarRessarcimentoPorIdPagamento(Long idPagamento){
+        Pagamento pagamento = pagamentoService.buscarPagamentoPorId(idPagamento)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pagamento não encontrado"));
+        return ressarcimentoRepository.findByPagamento(pagamento);
     }
 }
