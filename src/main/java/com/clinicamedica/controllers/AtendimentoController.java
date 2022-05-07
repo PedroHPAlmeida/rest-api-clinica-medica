@@ -26,4 +26,10 @@ public class AtendimentoController {
     public List<Atendimento> listarAtendimentos(){
         return atendimentoService.listarAtendimentos();
     }
+
+    @GetMapping(path = "/listar-por-cpf-paciente/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Atendimento> listarAtendimentosPorCpfPaciente(@PathVariable String cpf){
+        return atendimentoService.buscarAtendimentoPorCpfPaciente(cpf);
+    }
 }
