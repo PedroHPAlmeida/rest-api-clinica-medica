@@ -17,7 +17,7 @@ public class Atendimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAgendamento;
+    private Long idAtendimento;
 
     @OneToOne
     private Agendamento agendamento;
