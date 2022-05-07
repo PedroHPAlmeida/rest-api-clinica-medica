@@ -25,15 +25,15 @@ public class Clinica {
     @Column
     private String endereco;
     @Column
-    private String municipio;
+    private String inscricaoMunicipal;
     @Column
-    private String uf;
+    private String atividade;
 
-    public Clinica(String nome, String cnpj, String endereco, String municipio, String uf) {
+    public Clinica(String nome, String cnpj, String endereco, String inscricaoMunicipal, String atividade) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.endereco = endereco;
-        this.municipio = municipio;
-        this.uf = uf;
+        this.inscricaoMunicipal = inscricaoMunicipal;
+        this.atividade = atividade;
     }
 }
