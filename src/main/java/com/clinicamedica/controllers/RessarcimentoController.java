@@ -20,8 +20,8 @@ public class RessarcimentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void salvarRessarcimento(@RequestBody RessarcimentoView ressarcimentoView){
-        ressarcimentoService.salvarRessarcimento(ressarcimentoView);
+    public Ressarcimento salvarRessarcimento(@RequestBody RessarcimentoView ressarcimentoView){
+        return ressarcimentoService.salvarRessarcimento(ressarcimentoView);
     }
 
     @GetMapping
