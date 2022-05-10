@@ -64,7 +64,4 @@ public class PagamentoService {
     public Optional<Pagamento> buscarPagamentoPorId(Long id){
         return pagamentoRepository.findById(id);
     }
-
-    public void alterarPagamento(Pagamento pagamento, PagamentoView pagamentoView) {
-    }
 }
