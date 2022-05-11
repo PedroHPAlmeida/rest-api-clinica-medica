@@ -64,4 +64,8 @@ public class PagamentoService {
     public Optional<Pagamento> buscarPagamentoPorId(Long id){
         return pagamentoRepository.findById(id);
     }
+
+    public Optional<Pagamento> buscarPagamentoPorNotaFiscal(NotaFiscal notaFiscal){
+        return pagamentoRepository.findByNotaFiscal(notaFiscal);
+    }
 }
