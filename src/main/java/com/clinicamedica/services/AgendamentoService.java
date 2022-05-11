@@ -5,7 +5,10 @@ import com.clinicamedica.repositories.AgendamentoCustomRepository;
 import com.clinicamedica.repositories.IAgendamentoRepository;
 import com.clinicamedica.views.AgendamentoView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -57,11 +60,24 @@ public class AgendamentoService {
         return agendamentoRepository.findByStatus(status);
     }
 
+    public List<Agendamento> listarAgendamentosPorMedico(Medico medico){
+        return agendamentoRepository.findByMedico(medico);
+    }
+
     public List<Agendamento> listarAgendamentosPorCpfEStatus(String cpf, Integer status){
         return agendamentoCustomRepository.listarAgendamentosPorCpfEStatus(cpf, status);
     }
 
     public Optional<Agendamento> buscarAgendamentoPorId(Long id){
         return agendamentoRepository.findById(id);
+    }
+
+    public List<Agendamento> listarAgendamentoPorIdMedicoEPeriodo(Long idMedico, Integer dias){
+        if(dias == null) {
+            Medico medico = medicoService.buscarMedicoPorId(idMedico)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Médico não encontrado."));
+            return this.listarAgendamentosPorMedico(medico);
+        }
+        return agendamentoCustomRepository.listarAgendamentosPorIdMedicoEPeriodo(idMedico, dias);
     }
 }

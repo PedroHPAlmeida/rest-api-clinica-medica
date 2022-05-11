@@ -1,9 +1,11 @@
 package com.clinicamedica.repositories;
 
 import com.clinicamedica.entities.Agendamento;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -42,6 +44,30 @@ public class AgendamentoCustomRepository {
             q.setParameter("status", status);
         }
         System.out.println(query);
+        return q.getResultList();
+    }
+
+    public List<Agendamento> listarAgendamentosPorIdMedicoEPeriodo(Long idMedico, Integer dias){
+        String query = "SELECT agend.* FROM agendamentos AS agend " +
+                       "INNER JOIN medicos as med on agend.medico_id_funcionario = med.id_funcionario " +
+                       "WHERE med.id_funcionario = :idMedico ";
+        if(dias < 0){
+            query += "AND agend.data_agendada >= :dataAnterior AND agend.data_agendada < :hoje";
+        } else {
+            query += "AND agend.data_agendada >= :hoje AND agend.data_agendada <= :dataFutura";
+        }
+
+        var q = entityManager.createNativeQuery(query, Agendamento.class);
+        q.setParameter("idMedico", idMedico);
+        q.setParameter("hoje", LocalDate.now().toString());
+        if(dias < 0){
+            String dataAnterior = LocalDate.now().minusDays(-dias).toString();
+            q.setParameter("dataAnterior", dataAnterior);
+        } else {
+            String dataFutura = LocalDate.now().plusDays(dias).toString();
+            System.out.println(dataFutura);
+            q.setParameter("dataFutura", dataFutura);
+        }
         return q.getResultList();
     }
 }

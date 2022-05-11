@@ -60,4 +60,10 @@ public class AgendamentoController {
         return agendamentoService.buscarAgendamentoPorId(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Agendamento não encontrado."));
     }
+
+    @GetMapping(path = "/listar-por-medico-id-e-periodo")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Agendamento> listarAgendamentoPorIdMedicoEPeriodo(@RequestParam Long idMedico, @RequestParam(required = false) Integer periodo){
+        return agendamentoService.listarAgendamentoPorIdMedicoEPeriodo(idMedico, periodo);
+    }
 }

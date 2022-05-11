@@ -1,6 +1,7 @@
 package com.clinicamedica.repositories;
 
 import com.clinicamedica.entities.Agendamento;
+import com.clinicamedica.entities.Medico;
 import com.clinicamedica.entities.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,5 @@ public interface IAgendamentoRepository extends JpaRepository<Agendamento, Long>
 
     List<Agendamento> findByPaciente(Paciente paciente);
     List<Agendamento> findByStatus(Integer status);
+    List<Agendamento> findByMedico(Medico medico);
 }
