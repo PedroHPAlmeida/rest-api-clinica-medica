@@ -7,12 +7,14 @@ import com.clinicamedica.entities.Ressarcimento;
 import com.clinicamedica.repositories.INotaFiscalRepository;
 import com.clinicamedica.repositories.IPagamentoRepository;
 import com.clinicamedica.repositories.IRessarcimentoRepository;
+import com.clinicamedica.repositories.NotaFiscalCustomRepository;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +23,12 @@ public class NotaFiscalService {
 
     @Autowired
     private INotaFiscalRepository notaFiscalRepository;
-
     @Autowired
     private IPagamentoRepository pagamentoRepository;
-
     @Autowired
     private IRessarcimentoRepository ressarcimentoRepository;
+    @Autowired
+    private NotaFiscalCustomRepository notaFiscalCustomRepository;
 
     public NotaFiscal salvarNotaFiscal(NotaFiscal notaFiscal){
         return notaFiscalRepository.save(notaFiscal);
@@ -51,5 +53,15 @@ public class NotaFiscalService {
             Optional<Ressarcimento> ressarcimento = ressarcimentoRepository.findByNotaFiscal(notaFiscal);
             return ressarcimento.get().getPagamento().getAgendamento().getPaciente();
         }
+    }
+
+    public List<NotaFiscal> listarNotasPorPeriodo(Integer dias){
+        if(dias == null) {
+            return this.listarNotasFiscais();
+        }
+        LocalDate hoje = LocalDate.now();
+        LocalDate dataAnterior = hoje.minusDays(dias);
+        System.out.println(dataAnterior);
+        return notaFiscalCustomRepository.listarNotasPorPeriodo(dataAnterior.toString());
     }
 }

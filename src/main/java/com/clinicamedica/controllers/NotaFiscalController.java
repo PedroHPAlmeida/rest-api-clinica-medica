@@ -40,7 +40,14 @@ public class NotaFiscalController {
     }
 
     @GetMapping(path = "/buscar-paciente-por-nota-fiscal/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Paciente buscarPacientePorIdNotaFiscal(@PathVariable Long id){
         return notaFiscalService.buscarPacientePorIdNotaFiscal(id);
+    }
+
+    @GetMapping(path = "/listar-por-periodo")
+    @ResponseStatus(HttpStatus.OK)
+    public List<NotaFiscal> listarNotasPorPeriodo(@RequestParam(required = false) Integer dias){
+        return notaFiscalService.listarNotasPorPeriodo(dias);
     }
 }
