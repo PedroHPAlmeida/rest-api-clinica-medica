@@ -6,14 +6,10 @@ import com.clinicamedica.repositories.IAgendamentoRepository;
 import com.clinicamedica.views.AgendamentoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.crypto.spec.OAEPParameterSpec;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class AgendamentoService {
@@ -28,7 +24,6 @@ public class AgendamentoService {
     private ServicoService servicoService;
     @Autowired
     private MedicoService medicoService;
-
     @Autowired
     private AgendamentoCustomRepository agendamentoCustomRepository;
 
