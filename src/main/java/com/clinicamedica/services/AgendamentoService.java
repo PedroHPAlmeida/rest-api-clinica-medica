@@ -1,6 +1,7 @@
 package com.clinicamedica.services;
 
 import com.clinicamedica.entities.*;
+import com.clinicamedica.repositories.AgendamentoCustomRepository;
 import com.clinicamedica.repositories.IAgendamentoRepository;
 import com.clinicamedica.views.AgendamentoView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class AgendamentoService {
     private ServicoService servicoService;
     @Autowired
     private MedicoService medicoService;
+
+    @Autowired
+    private AgendamentoCustomRepository agendamentoCustomRepository;
 
     public void salvarAgendamento(AgendamentoView agendamentoView){
         Funcionario recepcionista = funcionarioService.buscarFuncionarioPorId(agendamentoView.getRecepcionistaId()).get();
@@ -57,19 +61,9 @@ public class AgendamentoService {
     public List<Agendamento> listarAgendamentosPorStatus(Integer status){
         return agendamentoRepository.findByStatus(status);
     }
-    public Set<Agendamento> listarAgendamentosPorCpfEStatus(String cpf, Integer status){
-        Set<Agendamento> agendamentos = new HashSet<>();
-        if(cpf != null && !cpf.equals("")){
-            List<Agendamento> agendamentosPaciente = listarAgendamentosPorPaciente(cpf);
-            agendamentos.addAll(agendamentosPaciente);
-        }
-        if(agendamentos.size() > 0 && status != null){
-            agendamentos.removeIf(agendamento -> agendamento.getStatus() != status);
-        } else if(status != null){
-            List<Agendamento> agendamentosStatus = listarAgendamentosPorStatus(status);
-            agendamentos.addAll(agendamentosStatus);
-        }
-        return agendamentos;
+
+    public List<Agendamento> listarAgendamentosPorCpfEStatus(String cpf, Integer status){
+        return agendamentoCustomRepository.listarAgendamentosPorCpfEStatus(cpf, status);
     }
 
     public Optional<Agendamento> buscarAgendamentoPorId(Long id){

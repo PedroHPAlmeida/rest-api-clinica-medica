@@ -38,7 +38,7 @@ public class AgendamentoController {
 
     @GetMapping(path = "/listar-por-cpf-e-status")
     @ResponseStatus(HttpStatus.OK)
-    public Set<Agendamento> listarAgendamentosPorCpfEStatus(@RequestParam(required = false) String cpf, @RequestParam(required = false) Integer status){
+    public List<Agendamento> listarAgendamentosPorCpfEStatus(@RequestParam(required = false) String cpf, @RequestParam(required = false) Integer status){
         return agendamentoService.listarAgendamentosPorCpfEStatus(cpf, status);
     }
 
