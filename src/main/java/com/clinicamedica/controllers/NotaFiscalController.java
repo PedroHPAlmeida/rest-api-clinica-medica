@@ -1,6 +1,7 @@
 package com.clinicamedica.controllers;
 
 import com.clinicamedica.entities.NotaFiscal;
+import com.clinicamedica.entities.Paciente;
 import com.clinicamedica.services.NotaFiscalService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class NotaFiscalController {
     public NotaFiscal buscarNotaFiscalPorId(@PathVariable Long id){
         return notaFiscalService.buscarNotaFiscalPorId(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Nota Fiscal não encontrada."));
+    }
+
+    @GetMapping(path = "/buscar-paciente-por-nota-fiscal/{id}")
+    public Paciente buscarPacientePorIdNotaFiscal(@PathVariable Long id){
+        return notaFiscalService.buscarPacientePorIdNotaFiscal(id);
     }
 }
