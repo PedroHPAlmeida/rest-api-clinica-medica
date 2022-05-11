@@ -54,4 +54,8 @@ public class RessarcimentoService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pagamento não encontrado"));
         return ressarcimentoRepository.findByPagamento(pagamento);
     }
+
+    public Optional<Ressarcimento> buscarRessarcimentoPorNotaFiscal(NotaFiscal notaFiscal){
+        return ressarcimentoRepository.findByNotaFiscal(notaFiscal);
+    }
 }
