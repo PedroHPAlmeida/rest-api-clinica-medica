@@ -1,7 +1,7 @@
 package com.clinicamedica.services;
 
 import com.clinicamedica.entities.Funcionario;
-import com.clinicamedica.entities.Login;
+import com.clinicamedica.views.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

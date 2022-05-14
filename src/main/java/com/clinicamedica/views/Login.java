@@ -1,4 +1,4 @@
-package com.clinicamedica.entities;
+package com.clinicamedica.views;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

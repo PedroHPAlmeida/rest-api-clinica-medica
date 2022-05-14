@@ -1,7 +1,7 @@
 package com.clinicamedica.controllers;
 
 import com.clinicamedica.entities.Funcionario;
-import com.clinicamedica.entities.Login;
+import com.clinicamedica.views.Login;
 import com.clinicamedica.exceptions.FuncionarioException;
 import com.clinicamedica.services.FuncionarioService;
 import com.clinicamedica.services.LoginService;
