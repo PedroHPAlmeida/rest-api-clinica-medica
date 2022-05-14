@@ -23,8 +23,8 @@ public class ClinicaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void salvarClinica(@RequestBody Clinica clinica){
-        clinicaService.salvarClinica(clinica);
+    public Clinica salvarClinica(@RequestBody Clinica clinica){
+        return clinicaService.salvarClinica(clinica);
     }
 
     @GetMapping
