@@ -37,7 +37,7 @@ public class PagamentoService {
         pagamento.setValor(pagamentoView.getValor());
 
         Clinica clinica = clinicaService.buscarClinicaPorId(1l).get();
-        NotaFiscal notaFiscal = new NotaFiscal(clinica, pagamento.getValor(), pagamento.getData(), 0D, agendamento.getServico().getDescricaoServico());
+        NotaFiscal notaFiscal = new NotaFiscal(clinica, pagamento.getValor() - pagamento.getDesconto(), pagamento.getData(), 0D, agendamento.getServico().getDescricaoServico());
         notaFiscalService.salvarNotaFiscal(notaFiscal);
 
         pagamento.setNotaFiscal(notaFiscal);
