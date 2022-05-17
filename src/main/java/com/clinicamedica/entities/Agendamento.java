@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity(name = "agendamentos")
-public class Agendamento {
+public class Agendamento implements Comparable<Agendamento>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,5 +49,10 @@ public class Agendamento {
         this.horaAgendada = horaAgendada;
         this.servico = servico;
         this.status = status;
+    }
+
+    @Override
+    public int compareTo(Agendamento agendamento) {
+        return this.idAgendamento.compareTo(agendamento.getIdAgendamento());
     }
 }
