@@ -72,12 +72,12 @@ public class AgendamentoService {
         return agendamentoRepository.findById(id);
     }
 
-    public List<Agendamento> listarAgendamentoPorIdMedicoEPeriodo(Long idMedico, Integer dias){
-        if(dias == null) {
+    public List<Agendamento> listarAgendamentoPorIdMedicoEPeriodo(Long idMedico, Integer dias, Integer status){
+        if(dias == null && status == null) {
             Medico medico = medicoService.buscarMedicoPorId(idMedico)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Médico não encontrado."));
             return this.listarAgendamentosPorMedico(medico);
         }
-        return agendamentoCustomRepository.listarAgendamentosPorIdMedicoEPeriodo(idMedico, dias);
+        return agendamentoCustomRepository.listarAgendamentosPorIdMedicoEPeriodo(idMedico, dias, status);
     }
 }

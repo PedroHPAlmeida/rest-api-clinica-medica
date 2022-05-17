@@ -67,8 +67,8 @@ public class AgendamentoController {
 
     @GetMapping(path = "/listar-por-medico-id-e-periodo")
     @ResponseStatus(HttpStatus.OK)
-    public List<Agendamento> listarAgendamentoPorIdMedicoEPeriodo(@RequestParam Long idMedico, @RequestParam(required = false) Integer periodo){
-        List<Agendamento> agendamentos = agendamentoService.listarAgendamentoPorIdMedicoEPeriodo(idMedico, periodo);
+    public List<Agendamento> listarAgendamentoPorIdMedicoEPeriodo(@RequestParam Long idMedico, @RequestParam(required = false) Integer periodo, @RequestParam(required = false) Integer status){
+        List<Agendamento> agendamentos = agendamentoService.listarAgendamentoPorIdMedicoEPeriodo(idMedico, periodo, status);
         Collections.sort(agendamentos, Collections.reverseOrder());
         return agendamentos;
     }
