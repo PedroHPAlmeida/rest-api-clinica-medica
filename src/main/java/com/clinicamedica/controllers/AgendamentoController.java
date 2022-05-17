@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -40,7 +42,9 @@ public class AgendamentoController {
     @GetMapping(path = "/listar-por-cpf-e-status")
     @ResponseStatus(HttpStatus.OK)
     public List<Agendamento> listarAgendamentosPorCpfEStatus(@RequestParam(required = false) String cpf, @RequestParam(required = false) Integer status){
-        return agendamentoService.listarAgendamentosPorCpfEStatus(cpf, status);
+        List<Agendamento> agendamentos = agendamentoService.listarAgendamentosPorCpfEStatus(cpf, status);
+        Collections.sort(agendamentos, Collections.reverseOrder());
+        return agendamentos;
     }
 
     @PutMapping
@@ -64,6 +68,8 @@ public class AgendamentoController {
     @GetMapping(path = "/listar-por-medico-id-e-periodo")
     @ResponseStatus(HttpStatus.OK)
     public List<Agendamento> listarAgendamentoPorIdMedicoEPeriodo(@RequestParam Long idMedico, @RequestParam(required = false) Integer periodo){
-        return agendamentoService.listarAgendamentoPorIdMedicoEPeriodo(idMedico, periodo);
+        List<Agendamento> agendamentos = agendamentoService.listarAgendamentoPorIdMedicoEPeriodo(idMedico, periodo);
+        Collections.sort(agendamentos, Collections.reverseOrder());
+        return agendamentos;
     }
 }
